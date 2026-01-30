@@ -10,6 +10,18 @@
   --accent: #38bdf8;
   --accent-dim: #1e3a5f;
   --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --dot-color: rgba(30, 42, 66, 0.5);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8f9fb;
+  --bg-secondary: #ffffff;
+  --border: #e2e6ee;
+  --text-primary: #1a1f2e;
+  --text-muted: #5a6478;
+  --accent: #0c7fd4;
+  --accent-dim: #dbeeff;
+  --dot-color: rgba(200, 210, 225, 0.6);
 }
 
 *,
@@ -30,6 +42,7 @@ body {
   font-family: var(--font-main);
   font-size: 1rem;
   line-height: 1.7;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 a {
@@ -102,6 +115,11 @@ a:hover {
   box-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
 }
 
+[data-theme="light"] .nav.scrolled {
+  background-color: rgba(248, 249, 251, 0.95);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08);
+}
+
 .nav .container {
   display: flex;
   align-items: center;
@@ -129,8 +147,56 @@ a:hover {
   transition: color 0.2s;
 }
 
-.nav-links a:hover {
-  color: var(--text-primary);
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+.theme-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  position: relative;
+}
+
+/* Moon (dark mode) */
+.theme-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--text-muted);
+  clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 40% 100%, 25% 85%, 15% 65%, 15% 35%, 25% 15%);
+  transition: clip-path 0.3s, background 0.3s;
+}
+
+/* Sun (light mode) */
+[data-theme="light"] .theme-icon::before {
+  clip-path: circle(35% at 50% 50%);
+  background: var(--accent);
 }
 
 /* Hamburger */
@@ -201,10 +267,32 @@ a:hover {
   align-items: center;
   position: relative;
   padding-top: 4rem;
+  background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.hero-layout {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 }
 
 .hero-content {
   animation: fadeInUp 0.8s ease both;
+  flex: 1;
+}
+
+.hero-headshot {
+  flex-shrink: 0;
+  animation: fadeInUp 0.8s 0.15s ease both;
+}
+
+.hero-headshot img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  object-fit: cover;
 }
 
 .hero h1 {
@@ -288,6 +376,49 @@ a:hover {
   60% {
     transform: translateX(-50%) translateY(-4px);
   }
+}
+
+/* ===========================
+   Stats Banner
+   =========================== */
+.stats-banner {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-banner .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stat {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.stat-sep {
+  color: var(--border);
+  font-size: 0.9rem;
+  margin: 0 0.25rem;
+}
+
+/* ===========================
+   Now
+   =========================== */
+.now {
+  padding: 5rem 0 3rem;
+}
+
+.now-text {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 650px;
+  line-height: 1.8;
 }
 
 /* ===========================
@@ -465,6 +596,33 @@ a:hover {
 }
 
 /* ===========================
+   Interests
+   =========================== */
+.interests {
+  padding: 4rem 0;
+}
+
+.interests-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.interest-item {
+  flex: 1 1 200px;
+}
+
+.interest-item h3 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.interest-item p {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+/* ===========================
    Contact
    =========================== */
 .contact {
@@ -534,5 +692,31 @@ a:hover {
 
   .skills-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile: stack headshot above text */
+@media (max-width: 767px) {
+  .hero-layout {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .hero-headshot img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero .bio {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stats-banner .container {
+    gap: 0.3rem;
+  }
+
+  .stat {
+    font-size: 0.8rem;
   }
 }
