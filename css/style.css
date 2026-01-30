@@ -228,6 +228,24 @@ a:hover {
   font-size: 1.1rem;
   max-width: 600px;
   line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+/* Button */
+.btn {
+  display: inline-block;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--accent);
+  color: var(--bg-primary);
 }
 
 @keyframes fadeInUp {
@@ -270,6 +288,78 @@ a:hover {
   60% {
     transform: translateX(-50%) translateY(-4px);
   }
+}
+
+/* ===========================
+   Experience & Education (timeline)
+   =========================== */
+.experience,
+.education {
+  padding: 6rem 0;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.timeline-entry {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.75rem;
+  transition: border-color 0.25s;
+}
+
+.timeline-entry:hover {
+  border-color: var(--accent);
+}
+
+.timeline-header h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-meta {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.timeline-date {
+  display: block;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-details {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timeline-details li {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.timeline-details li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 /* ===========================
