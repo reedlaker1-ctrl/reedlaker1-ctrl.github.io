@@ -4,6 +4,7 @@
 :root {
   --bg-primary: #0a0f1a;
   --bg-secondary: #141c2e;
+  --bg-offset: var(--bg-secondary);
   --border: #1e2a42;
   --text-primary: #e2e8f0;
   --text-muted: #7a8ba8;
@@ -83,6 +84,10 @@ a:hover {
   height: 3px;
   background: var(--accent);
   border-radius: 2px;
+}
+
+.italic {
+  font-style: italic;
 }
 
 /* Scroll reveal */
@@ -676,6 +681,23 @@ a:hover {
   color: var(--text-muted);
   font-size: 0.8rem;
   border-top: 1px solid var(--border);
+}
+
+.site-footer a {
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.site-footer a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Focus styles for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
 
 /* ===========================
